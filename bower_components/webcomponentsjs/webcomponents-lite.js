@@ -7,7 +7,7 @@
  * Code distributed by Google as part of the polymer project is also
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
-// @version 0.7.21
+// @version 0.7.20
 (function() {
   window.WebComponents = window.WebComponents || {
     flags: {}
@@ -912,29 +912,14 @@ if (typeof WeakMap === "undefined") {
   }
 })(self);
 
-(function() {
-  var needsTemplate = typeof HTMLTemplateElement === "undefined";
-  var needsCloning = function() {
-    if (!needsTemplate) {
-      var frag = document.createDocumentFragment();
-      var t = document.createElement("template");
-      frag.appendChild(t);
-      t.content.appendChild(document.createElement("div"));
-      var clone = frag.cloneNode(true);
-      return clone.firstChild.content.childNodes.length === 0;
-    }
-  }();
-  var TEMPLATE_TAG = "template";
-  var TemplateImpl = function() {};
-  if (needsTemplate) {
+if (typeof HTMLTemplateElement === "undefined") {
+  (function() {
+    var TEMPLATE_TAG = "template";
     var contentDoc = document.implementation.createHTMLDocument("template");
     var canDecorate = true;
-    var templateStyle = document.createElement("style");
-    templateStyle.textContent = TEMPLATE_TAG + "{display:none;}";
-    var head = document.head;
-    head.insertBefore(templateStyle, head.firstElementChild);
-    TemplateImpl.prototype = Object.create(HTMLElement.prototype);
-    TemplateImpl.decorate = function(template) {
+    HTMLTemplateElement = function() {};
+    HTMLTemplateElement.prototype = Object.create(HTMLElement.prototype);
+    HTMLTemplateElement.decorate = function(template) {
       if (template.content) {
         return;
       }
@@ -955,7 +940,7 @@ if (typeof WeakMap === "undefined") {
             },
             set: function(text) {
               contentDoc.body.innerHTML = text;
-              TemplateImpl.bootstrap(contentDoc);
+              HTMLTemplateElement.bootstrap(contentDoc);
               while (this.content.firstChild) {
                 this.content.removeChild(this.content.firstChild);
               }
@@ -965,30 +950,27 @@ if (typeof WeakMap === "undefined") {
             },
             configurable: true
           });
-          template.cloneNode = function(deep) {
-            return TemplateImpl.cloneNode(this, deep);
-          };
         } catch (err) {
           canDecorate = false;
         }
       }
-      TemplateImpl.bootstrap(template.content);
+      HTMLTemplateElement.bootstrap(template.content);
     };
-    TemplateImpl.bootstrap = function(doc) {
+    HTMLTemplateElement.bootstrap = function(doc) {
       var templates = doc.querySelectorAll(TEMPLATE_TAG);
       for (var i = 0, l = templates.length, t; i < l && (t = templates[i]); i++) {
-        TemplateImpl.decorate(t);
+        HTMLTemplateElement.decorate(t);
       }
     };
     document.addEventListener("DOMContentLoaded", function() {
-      TemplateImpl.bootstrap(document);
+      HTMLTemplateElement.bootstrap(document);
     });
     var createElement = document.createElement;
     document.createElement = function() {
       "use strict";
       var el = createElement.apply(document, arguments);
       if (el.localName == "template") {
-        TemplateImpl.decorate(el);
+        HTMLTemplateElement.decorate(el);
       }
       return el;
     };
@@ -1011,61 +993,8 @@ if (typeof WeakMap === "undefined") {
     function escapeData(s) {
       return s.replace(escapeDataRegExp, escapeReplace);
     }
-  }
-  if (needsTemplate || needsCloning) {
-    var nativeCloneNode = Node.prototype.cloneNode;
-    TemplateImpl.cloneNode = function(template, deep) {
-      var clone = nativeCloneNode.call(template);
-      if (this.decorate) {
-        this.decorate(clone);
-      }
-      if (deep) {
-        clone.content.appendChild(nativeCloneNode.call(template.content, true));
-        this.fixClonedDom(clone.content, template.content);
-      }
-      return clone;
-    };
-    TemplateImpl.fixClonedDom = function(clone, source) {
-      var s$ = source.querySelectorAll(TEMPLATE_TAG);
-      var t$ = clone.querySelectorAll(TEMPLATE_TAG);
-      for (var i = 0, l = t$.length, t, s; i < l; i++) {
-        s = s$[i];
-        t = t$[i];
-        if (this.decorate) {
-          this.decorate(s);
-        }
-        t.parentNode.replaceChild(s.cloneNode(true), t);
-      }
-    };
-    var originalImportNode = document.importNode;
-    Node.prototype.cloneNode = function(deep) {
-      var dom = nativeCloneNode.call(this, deep);
-      if (deep) {
-        TemplateImpl.fixClonedDom(dom, this);
-      }
-      return dom;
-    };
-    document.importNode = function(element, deep) {
-      if (element.localName === TEMPLATE_TAG) {
-        return TemplateImpl.cloneNode(element, deep);
-      } else {
-        var dom = originalImportNode.call(document, element, deep);
-        if (deep) {
-          TemplateImpl.fixClonedDom(dom, element);
-        }
-        return dom;
-      }
-    };
-    if (needsCloning) {
-      HTMLTemplateElement.prototype.cloneNode = function(deep) {
-        return TemplateImpl.cloneNode(this, deep);
-      };
-    }
-  }
-  if (needsTemplate) {
-    HTMLTemplateElement = TemplateImpl;
-  }
-})();
+  })();
+}
 
 (function(scope) {
   "use strict";
@@ -1666,7 +1595,7 @@ window.HTMLImports.addModule(function(scope) {
       if (doc && this._mayParse.indexOf(doc) < 0) {
         this._mayParse.push(doc);
         var nodes = doc.querySelectorAll(this.parseSelectorsForNode(doc));
-        for (var i = 0, l = nodes.length, n; i < l && (n = nodes[i]); i++) {
+        for (var i = 0, l = nodes.length, p = 0, n; i < l && (n = nodes[i]); i++) {
           if (!this.isParsed(n)) {
             if (this.hasResource(n)) {
               return nodeIsImport(n) ? this.nextToParseInDoc(n.__doc, n) : n;
