@@ -12,9 +12,3 @@ body {
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #333;
 }
-
-paper-drawer-panel {
-  --paper-drawer-panel-left-drawer-container: {
-    background-color: blue;
-  };
-}
