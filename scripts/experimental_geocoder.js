@@ -1,39 +1,46 @@
-var geocoder;
+var panorama;
+
 function initialize() {
-  geocoder = new google.maps.Geocoder();
-  var latlng = new google.maps.LatLng(40.730885,-73.997383);
-  codeLatLng(function(addr){
-    alert(addr);
-  });
+    panorama = new google.maps.StreetViewPanorama(
+        document.getElementById('street-view'), {
+            position: {
+                lat: 37.869260
+                , lng: -122.254811
+            }
+            , pov: {
+                heading: 165
+                , pitch: 0
+            }
+            , zoom: 1
+        });
+
+    var geocoder = new google.maps.Geocoder();
+
+    document.getElementById('submit').addEventListener('click', function () {
+        geocodeAddress(geocoder, street - view);
+    });
 }
 
-function codeLatLng(callback) {
-  var latlng = new google.maps.LatLng(40.730885,-73.997383);
-  if (geocoder) {
-    geocoder.geocode({'latLng': latlng}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        if (results[1]) {
-          callback(results[1].formatted_address);
+function geocodeAddress(geocoder, resultsMap) {
+    var address = document.getElementById('address').value;
+    geocoder.geocode({
+        'address': address
+    }, function (results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+            resultsMap.setCenter(results[0].geometry.location);
+            var streetview = new google.maps.StreetViewPanorama(
+                document.getElementById('street-view'), {
+                    position: {
+                        results[0].geometry.location
+                    }
+                    , pov: {
+                        heading: 165
+                        , pitch: 0
+                    }
+                    , zoom: 1
+                });
         } else {
-          alert("No results found");
+            alert('Geocode was not successful for the following reason: ' + status);
         }
-      } else {
-        alert("Geocoder failed due to: " + status);
-      }
     });
-  }
-    
-function initWindow() {
-    var panorama = new google.maps.StreetViewPanorama(
-      document.getElementById('map'), {
-        position: place,
-        pov: {
-          heading: 34,
-          pitch: 10
-        }
-      });
-var geocoder = new google.maps.Geocoder();
-
-document.getElementById('submit').addEventListener('click', function () {
-    geocodeAddress(geocoder, map);
-});
+}
