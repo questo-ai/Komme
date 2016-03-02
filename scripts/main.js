@@ -1,6 +1,6 @@
-var latitude
-var longitude
-var place
+var latitude;
+var longitude;
+var place = {lat: latitude, lng: longitude};
 
 function geocodeAddress(geocoder, resultsMap) {
     var address = document.getElementById('address').value;
