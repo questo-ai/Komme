@@ -21,7 +21,7 @@ function geocodeAddress(geocoder, resultsMap) {
 
 function initWindow() {
     var panorama = new google.maps.StreetViewPanorama(
-      document.getElementById('pano'), {
+      document.getElementById('map'), {
         position: place,
         pov: {
           heading: 34,
