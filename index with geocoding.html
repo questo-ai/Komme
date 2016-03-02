@@ -4,16 +4,19 @@
     <title>Geocoding service</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <script src="Window.js"></script>
+    <script src="window.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
     <div id="floating-panel">
-      <input id="address" type="textbox" value="Sydney, NSW">
-      <input id="submit" type="button" value="Geocode">
+    <input id="address" type="textbox" value="Sydney, NSW">
+    <input id="submit" type="button" value="Geocode">
     </div>
     <div id="map"></div>
+    <div id="pano"></div>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVLEc9NZ1OgiYLrN_M7yEg5DYZo5dM8LE&callback=initMap">
     </script>
+      
   </body>
 </html>
