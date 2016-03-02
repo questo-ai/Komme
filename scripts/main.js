@@ -41,4 +41,5 @@ function geocodeAddress(geocoder, resultlocation) {
 
 document.getElementById('submit').addEventListener('click', function () {
     geocodeAddress(geocoder, map);
+    window.
 });
