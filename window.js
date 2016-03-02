@@ -2,13 +2,13 @@
 function initialize() {
         var location = {lat: 'latitude', lng: 'longitude'};
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: fenway,
+          center: location,
           zoom: 14
         var geocoder;
   var map;
   function initialize() {
     geocoder = new google.maps.Geocoder();
-    var latlng = new google.maps.LatLng(1.352083, 103.819836);
+    var latlng = new google.maps.LatLng('latitude', 'longitude');
     var mapOptions = {
       zoom: 8,
       center: latlng
