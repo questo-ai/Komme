@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Geocoding service</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
+    <title>Street View</title>
     <link rel="stylesheet" type="text/css" href="styles/main.css">
     <script src="scripts/experimental_geocoder.js"></script>
   </head>
   <body>
-    <div id="floating-panel">
-      <input id="address" type="textbox" value="Singapore">
-      <input id="submit" type="button" value="Geocode">
-    </div>
-    <div id="map"></div>
+    <div id="street-view"></div>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVLEc9NZ1OgiYLrN_M7yEg5DYZo5dM8LE&callback=initMap">
-    
+         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVLEc9NZ1OgiYLrN_M7yEg5DYZo5dM8LE&callback=initialize">
     </script>
   </body>
 </html>
