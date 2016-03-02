@@ -1,16 +1,15 @@
 var resultlocation = {lat: 0, lng: 0};
 var map;
-
+var latlng;
 function initMap() {
-    // new google.maps.Geocoder()
-    // var mapOptions = {
-    //   position: resultlocation,
-    //   pov: {
-    //     heading: 34,
-    //     pitch: 10
-    //   }
-    // }
-    // var panorama = new google.maps.StreetViewPanorama(document.getElementById('map'), mapOptions);
+    var mapOptions = {
+      position: resultlocation,
+      pov: {
+        heading: 34,
+        pitch: 10
+      }
+    }
+    var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), mapOptions);
     var map = new google.maps.Map(document.getElementById('map'), {
          zoom: 8,
          center: {lat: -34.397, lng: 150.644}
