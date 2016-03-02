@@ -2,23 +2,23 @@ var panorama;
 
 function initialize() {
     panorama = new google.maps.StreetViewPanorama(
-        document.getElementById('street-view'), {
-            position: {
-                lat: 37.869260
-                , lng: -122.254811
-            }
-            , pov: {
-                heading: 165
-                , pitch: 0
-            }
-            , zoom: 1
-        });
-
-    var geocoder = new google.maps.Geocoder();
-
-    document.getElementById('submit').addEventListener('click', function () {
-        geocodeAddress(geocoder, street - view);
+        document.getElementById('street-view')
+        , position: {
+            lat: 37.869260
+            , lng: -122.254811
+        }
+        , pov: {
+            heading: 165
+            , pitch: 0
+        }
+        , zoom: 1
     });
+
+var geocoder = new google.maps.Geocoder();
+
+document.getElementById('submit').addEventListener('click', function () {
+    geocodeAddress(geocoder, street - view);
+});
 }
 
 function geocodeAddress(geocoder, resultsMap) {
@@ -28,7 +28,7 @@ function geocodeAddress(geocoder, resultsMap) {
     }, function (results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
             resultsMap.setCenter(results[0].geometry.location);
-            var streetview = new google.maps.StreetViewPanorama(
+            panorama = new google.maps.StreetViewPanorama(
                 document.getElementById('street-view'), {
                     position: {
                         results[0].geometry.location
