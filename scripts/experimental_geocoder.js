@@ -1,21 +1,43 @@
-var panorama;
+var resultlocation = {lat: 0, lng: 0};
+var map;
 
-function initialize() {
-    panorama = new google.maps.StreetViewPanorama(
-        document.getElementById('street-view'), {
-            position: {
-                lat: 37.869260
-                , lng: -122.254811
-            }
-            , pov: {
-                heading: 165
-                , pitch: 0
-            }
-            , zoom: 1
-        });
-    var geocoder = new google.maps.Geocoder();
+function initMap() {
+    // new google.maps.Geocoder()
+    // var mapOptions = {
+    //   position: resultlocation,
+    //   pov: {
+    //     heading: 34,
+    //     pitch: 10
+    //   }
+    // }
+    // var panorama = new google.maps.StreetViewPanorama(document.getElementById('map'), mapOptions);
+    var map = new google.maps.Map(document.getElementById('map'), {
+         zoom: 8,
+         center: {lat: -34.397, lng: 150.644}
+       });
+       var geocoder = new google.maps.Geocoder();
 
-    document.getElementById('submit').addEventListener('click', function () {
-        geocodeAddress(geocoder, map);
+       document.getElementById('submit').addEventListener('click', function() {
+         geocodeAddress(geocoder, map);
+
+       });
+}
+
+function geocodeAddress(geocoder, resultsMap) {
+    var address = document.getElementById('address').value;
+    geocoder.geocode({'address': address}, function (results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+            resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+            latlng = results[0].geometry.location;
+            window.alert(latlng);
+            displaylatlng(latlng)
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
     });
 }
+s
