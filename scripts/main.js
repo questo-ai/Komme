@@ -1,4 +1,3 @@
-
 var resultlocation = {lat: 0, lng: 0};
 var map;
 
