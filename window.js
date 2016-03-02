@@ -1,5 +1,6 @@
+@import zone.js
 function initialize() {
-        var fenway = {lat: 'latitude', lng: 'longitude'};
+        var location = {lat: 'latitude', lng: 'longitude'};
         var map = new google.maps.Map(document.getElementById('map'), {
           center: fenway,
           zoom: 14
