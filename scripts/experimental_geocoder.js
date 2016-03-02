@@ -13,13 +13,13 @@ function initialize() {
         }
         , zoom: 1
     });
-
 var geocoder = new google.maps.Geocoder();
 
 document.getElementById('submit').addEventListener('click', function () {
     geocodeAddress(geocoder, street - view);
 });
-}
+
+
 
 function geocodeAddress(geocoder, resultsMap) {
     var address = document.getElementById('address').value;
