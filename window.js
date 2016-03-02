@@ -1,15 +1,10 @@
-<<<<<<< HEAD
 @import zone.js
-=======
-<<<<<<< Updated upstream
->>>>>>> origin/master
 function initialize() {
         var location = {lat: 'latitude', lng: 'longitude'};
         var map = new google.maps.Map(document.getElementById('map'), {
           center: fenway,
           zoom: 14
-=======
-var geocoder;
+        var geocoder;
   var map;
   function initialize() {
     geocoder = new google.maps.Geocoder();
@@ -29,7 +24,6 @@ var geocoder;
         var marker = new google.maps.Marker({
             map: map,
             position: results[0].geometry.location
->>>>>>> Stashed changes
         });
       } else {
         alert("Geocode was not successful for the following reason: " + status);
