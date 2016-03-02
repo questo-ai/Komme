@@ -1,7 +1,7 @@
 var resultlocation = {lat: 0, lng: 0};
 var map;
 
-function initWindow() {
+function initMap() {
     // new google.maps.Geocoder()
     // var mapOptions = {
     //   position: resultlocation,
@@ -23,22 +23,20 @@ function initWindow() {
        });
 }
 
-function geocodeAddress(geocoder, resultlocation) {
+function geocodeAddress(geocoder, resultsMap) {
     var address = document.getElementById('address').value;
     geocoder.geocode({'address': address}, function (results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
-            window.
             resultsMap.setCenter(results[0].geometry.location);
-            var latlng[] = results[0].geometry.location;
-            window.alert(latlng[])
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+            latlng = results[0].geometry.location;
+            window.alert(latlng);
+            displaylatlng(latlng)
         } else {
             alert('Geocode was not successful for the following reason: ' + status);
         }
     });
 }
-
-
-document.getElementById('submit').addEventListener('click', function () {
-    geocodeAddress(geocoder, map);
-    window.
-});
