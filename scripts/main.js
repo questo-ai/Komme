@@ -40,6 +40,6 @@ function geocodeAddress(geocoder, resultsMap) {
     });
 }
 
-function display_latlng(latlng) {
+function display_latlng() {
     window.alert(latlng)
 }

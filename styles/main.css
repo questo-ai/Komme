@@ -16,6 +16,7 @@ body {
 
 #map {
     height: 100%;
+    width: 50%;
 }
 
 #floating-panel {
