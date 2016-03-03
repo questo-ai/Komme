@@ -11,10 +11,12 @@ function initMap() {
       }
     }
     // Create a map object and define it
+    /*
     var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -34.397, lng: 150.644},
         zoom: 10
     });
+    */
    
     // Create a geocoder object
     var geocoder = new google.maps.Geocoder();
@@ -27,27 +29,42 @@ function initMap() {
     // Create a panorama streetview object and define it using mapOptions
     var panorama = new google.maps.StreetViewPanorama(
         document.getElementById('pano'), {
-            position: {lat: -34.397, lng: 150.644},
-            pov: {
-                heading: 34,
-                pitch: 10
-            }
-        }
-    )
+        position: latlng,
+        pov: {
+            heading: 270,
+            pitch: 0
+        },
+        visible: true
+    });
 }
+
 function geocodeAddress(geocoder, resultsMap) {
+    
     var address = document.getElementById('address').value;
+    
     geocoder.geocode({'address': address}, function (results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
+            /*
             resultsMap.setCenter(results[0].geometry.location);
+            
             var marker = new google.maps.Marker({
-              map: resultsMap,
-              position: results[0].geometry.location
+                map: resultsMap,
+                position: results[0].geometry.location
             });
+            */
             latlng = results[0].geometry.location;
             window.alert(latlng);
-            map.setStreetView(panorama)
-        } else {
+            var panorama = new google.maps.StreetViewPanorama(
+                document.getElementById('pano'), {
+                    position: latlng,
+                    pov: {
+                        heading: 270,
+                        pitch: 0
+                    },
+                    visible: true
+            });
+        } 
+        else {
             alert('Geocode was not successful for the following reason: ' + status);
         }
     });
