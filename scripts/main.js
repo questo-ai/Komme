@@ -39,3 +39,7 @@ function geocodeAddress(geocoder, resultsMap) {
         }
     });
 }
+
+function display_latlng(latlng) {
+    window.alert(latlng)
+}
