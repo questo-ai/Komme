@@ -1,27 +1,40 @@
-var resultlocation = {lat: 0, lng: 0};
 var map;
 var latlng;
+var panorama;
+
 function initMap() {
     var mapOptions = {
-      position: resultlocation,
+      position: latlng,
       pov: {
         heading: 34,
         pitch: 10
       }
     }
-    var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), mapOptions);
+    // Create a map object and define it
     var map = new google.maps.Map(document.getElementById('map'), {
-         zoom: 8,
-         center: {lat: -34.397, lng: 150.644}
-       });
-       var geocoder = new google.maps.Geocoder();
+        center: {lat: -34.397, lng: 150.644},
+        zoom: 10
+    });
+   
+    // Create a geocoder object
+    var geocoder = new google.maps.Geocoder();
 
-       document.getElementById('submit').addEventListener('click', function() {
-         geocodeAddress(geocoder, map);
+    // Use the geocoder object to locate the inputed location
+    document.getElementById('submit').addEventListener('click', function() {
+        geocodeAddress(geocoder, map);
+    });
 
-       });
+    // Create a panorama streetview object and define it using mapOptions
+    var panorama = new google.maps.StreetViewPanorama(
+        document.getElementById('pano'), {
+            position: {lat: -34.397, lng: 150.644},
+            pov: {
+                heading: 34,
+                pitch: 10
+            }
+        }
+    )
 }
-
 function geocodeAddress(geocoder, resultsMap) {
     var address = document.getElementById('address').value;
     geocoder.geocode({'address': address}, function (results, status) {
@@ -33,7 +46,7 @@ function geocodeAddress(geocoder, resultsMap) {
             });
             latlng = results[0].geometry.location;
             window.alert(latlng);
-            displaylatlng(latlng)
+            map.setStreetView(panorama)
         } else {
             alert('Geocode was not successful for the following reason: ' + status);
         }
@@ -41,7 +54,7 @@ function geocodeAddress(geocoder, resultsMap) {
 }
 
 function display_latlng() {
-    if (typeof variable !== 'undefined') {
+    if (typeof latlng !== 'undefined') {
         window.alert(latlng)
     }
     else {
