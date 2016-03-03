@@ -41,5 +41,10 @@ function geocodeAddress(geocoder, resultsMap) {
 }
 
 function display_latlng() {
-    window.alert(latlng)
+    if (typeof variable !== 'undefined') {
+        window.alert(latlng)
+    }
+    else {
+        window.alert("Please Geocode the address first.")
+    }
 }
