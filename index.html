@@ -8,24 +8,16 @@
     <script src="scripts/main.js"></script>
   </head>
   <body>
-    <div id="floating-panel">
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVLEc9NZ1OgiYLrN_M7yEg5DYZo5dM8LE&callback=initMap"></script>
+
+      <div id="floating-panel">
       <input id="address" type="textbox" value="Singapore">
       <input id="submit" type="button" value="Geocode">
-      <input id="latlng" type="button" value="Show latlng">
+      <button onclick="display_latlng()">Click me</button>
 
     </div>
-    <div id="map"></div>
+    <!-- <div id="map"></div> -->
     <div id="pano"></div>
-
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVLEc9NZ1OgiYLrN_M7yEg5DYZo5dM8LE&callback=initMap">
-    </script>
-  <script>
-  document.getElementById('latlng').addEventListener('click', function displaylatlng(r) {
-    var latlng = r;
-    window.alert(r);
-  })
-  </script>
 
   </body>
 </html>
