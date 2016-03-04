@@ -21,10 +21,6 @@ h1 {
     font-size: 500%;
 }
 
-title_text {
-    text-align:center;
-}
-
 #map {
     height: 100%;
     width: 50%;
@@ -38,7 +34,18 @@ title_text {
     margin-top: 0;
 }
 
-/*
+#floating-panel {
+    position: absolute;
+    top: 50%;
+    left: 42%;
+    z-index: 5;
+    padding: 5px;
+    text-align: center;
+    font-family: 'Roboto', 'sans-serif';
+}
+
+
+/* ORIGINAL PANEL
 #floating-panel {
     position: absolute;
     top: 10px;
@@ -53,13 +60,3 @@ title_text {
     padding-left: 10px;
 }
 */
-
-#floating-panel {
-    position: absolute;
-    top: 50%;
-    left: 42%;
-    z-index: 5;
-    padding: 5px;
-    text-align: center;
-    font-family: 'Roboto', 'sans-serif';
-}

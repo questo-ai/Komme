@@ -75,3 +75,7 @@ function create_panorama(coordinates) {
             linksControl: false
             });
 }
+
+function test() {
+    console.log("YAY")
+}
