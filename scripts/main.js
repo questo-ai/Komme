@@ -34,7 +34,8 @@ function initMap() {
             heading: 270,
             pitch: 0
         },
-        visible: true
+        visible: true,
+        addressControl: false
     });
 }
 
@@ -61,7 +62,9 @@ function geocodeAddress(geocoder, resultsMap) {
                         heading: 270,
                         pitch: 0
                     },
-                    visible: true
+                    visible: true,
+                    addressControl: false,
+                    linksControl: false
             });
         } 
         else {
