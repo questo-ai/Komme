@@ -14,6 +14,17 @@ body {
     padding: 0;
 }
 
+h1 {
+    text-align: center;
+    font-family: "Lucida Console", monospace;
+    margin-top: 0;
+    font-size: 500%;
+}
+
+title_text {
+    text-align:center;
+}
+
 #map {
     height: 100%;
     width: 50%;
@@ -23,7 +34,8 @@ body {
     height: 100%;
     width: 100%;
     background-image: url("background.jpg");
-    background-size:cover
+    background-size:cover;
+    margin-top: 0;
 }
 
 #floating-panel {
