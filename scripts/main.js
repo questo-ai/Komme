@@ -25,18 +25,8 @@ function initMap() {
     document.getElementById('submit').addEventListener('click', function() {
         geocodeAddress(geocoder, map);
     });
-
-    // Create a panorama streetview object and define it using mapOptions
-    var panorama = new google.maps.StreetViewPanorama(
-        document.getElementById('pano'), {
-        position: latlng,
-        pov: {
-            heading: 270,
-            pitch: 0
-        },
-        visible: true,
-        addressControl: false
-    });
+    
+    // Insert loading stuff here if needed
 }
 
 function geocodeAddress(geocoder, resultsMap) {
@@ -55,17 +45,7 @@ function geocodeAddress(geocoder, resultsMap) {
             */
             latlng = results[0].geometry.location;
             window.alert(latlng);
-            var panorama = new google.maps.StreetViewPanorama(
-                document.getElementById('pano'), {
-                    position: latlng,
-                    pov: {
-                        heading: 270,
-                        pitch: 0
-                    },
-                    visible: true,
-                    addressControl: false,
-                    linksControl: false
-            });
+            create_panorama(latlng);
         } 
         else {
             alert('Geocode was not successful for the following reason: ' + status);
@@ -80,4 +60,18 @@ function display_latlng() {
     else {
         window.alert("Please Geocode the address first.")
     }
+}
+
+function create_panorama(coordinates) {
+    var panorama = new google.maps.StreetViewPanorama(
+        document.getElementById('pano'), {
+            position: coordinates,
+            pov: {
+                heading: 270,
+                pitch: 0,
+            },
+            visible: true,
+            addressControl: false,
+            linksControl: false
+            });
 }
