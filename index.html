@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/menu.css">
-    <link rel="stylesheet" type="text/css" href="styles/app.css">
-    <link rel="stylesheet" type="text/css" href="styles/pure-drawer.css">
+    <!-- <link rel="stylesheet" type="text/css" href="styles/app.css">
+    <link rel="stylesheet" type="text/css" href="styles/pure-drawer.css"> -->
 
     <script src="scripts/main.js"></script>
   </head>
@@ -19,10 +19,11 @@
      <span class="hamb-middle"></span>
      <span class="hamb-bottom"></span>
    </button>
+   <a href="index.html"><img id="logo" src="images/komme_logo.png"/></a>
 
       <div id="pano">
-          <img id="logo" src="images/komme_logo.png"/>
           <div id="floating-panel">
+            <div id="error" style="color:red; font-size: 10px;"></div>
             <input id="address" type="textbox" value="Singapore">
             <input id="submit" type="button" value="Let's Go!" onclick="hide_panel('floating-panel');return false">
 

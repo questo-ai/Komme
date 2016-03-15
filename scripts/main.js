@@ -3,6 +3,7 @@ var latlng;
 var panorama;
 
 function initMap() {
+
     var mapOptions = {
       position: latlng,
       pov: {
@@ -21,8 +22,9 @@ function initMap() {
     // Create a geocoder object
     var geocoder = new google.maps.Geocoder();
 
+
     // Use the geocoder object to locate the inputed location
-    document.getElementById('submit').addEventListener('click', function() {
+    document.getElementById('submit').addEventListener('click', function(event) {
         geocodeAddress(geocoder, map);
     });
 
@@ -34,6 +36,7 @@ function geocodeAddress(geocoder, resultsMap) {
     var address = document.getElementById('address').value;
 
     geocoder.geocode({'address': address}, function (results, status) {
+
         if (status === google.maps.GeocoderStatus.OK) {
             /*
             resultsMap.setCenter(results[0].geometry.location);
@@ -44,21 +47,39 @@ function geocodeAddress(geocoder, resultsMap) {
             });
             */
             latlng = results[0].geometry.location;
-            window.alert(latlng);
-            create_panorama(latlng);
+
+                //create StreetViewService object to find the nearest StreetViewPanorama within a radius
+                var sv = new google.maps.StreetViewService();
+            sv.getPanorama({location: latlng, radius: 500}, processSVData);
+
         }
         else {
-            alert('Geocode was not successful for the following reason: ' + status);
+            error.innerHTML = ('Geocode was not successful for the following reason: ' + status);
+            document.getElementById('floating-panel').style.display = 'block';
+
+
         }
     });
 }
+function processSVData(data, status) {
+  if (status === google.maps.StreetViewStatus.OK) {
+    var latlng = data.location.latLng
+    console.log(latlng);
+    create_panorama(latlng);
+  } else {
+    error.innerHTML = ('Street View data not found for this location.');
+    document.getElementById('floating-panel').style.display = 'block';
 
+  }
+}
 function display_latlng() {
     if (typeof latlng !== 'undefined') {
-        window.alert(latlng)
+        console.log(latlng)
     }
     else {
-        window.alert("Please Geocode the address first.")
+        error.innerHTML = ("Please Geocode the address first.");
+        document.getElementById('floating-panel').style.display = 'block';
+
     }
 }
 
