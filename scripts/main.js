@@ -17,7 +17,7 @@ function initMap() {
         zoom: 10
     });
     */
-   
+
     // Create a geocoder object
     var geocoder = new google.maps.Geocoder();
 
@@ -25,19 +25,19 @@ function initMap() {
     document.getElementById('submit').addEventListener('click', function() {
         geocodeAddress(geocoder, map);
     });
-    
+
     // Insert loading stuff here if needed
 }
 
 function geocodeAddress(geocoder, resultsMap) {
-    
+
     var address = document.getElementById('address').value;
-    
+
     geocoder.geocode({'address': address}, function (results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
             /*
             resultsMap.setCenter(results[0].geometry.location);
-            
+
             var marker = new google.maps.Marker({
                 map: resultsMap,
                 position: results[0].geometry.location
@@ -46,7 +46,7 @@ function geocodeAddress(geocoder, resultsMap) {
             latlng = results[0].geometry.location;
             window.alert(latlng);
             create_panorama(latlng);
-        } 
+        }
         else {
             alert('Geocode was not successful for the following reason: ' + status);
         }
@@ -74,6 +74,9 @@ function create_panorama(coordinates) {
             addressControl: false,
             linksControl: false
             });
+}
+function hide_panel(id){
+    document.getElementById(id).style.display = 'none';
 }
 
 function test() {
