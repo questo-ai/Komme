@@ -111,3 +111,14 @@
   -webkit-transform: translate3d(-100px,0,0);
   -webkit-transition: all .35s ease-in-out;
 }
+
+#menu_drawer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 30%;
+    height: 100%;
+    background-color: #555;
+    z-index: 1000000000;
+    display: none;
+}

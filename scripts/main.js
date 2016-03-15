@@ -99,6 +99,21 @@ function create_panorama(coordinates) {
 function hide_panel(id){
     document.getElementById(id).style.display = 'none';
 }
+function show_panel(){
+    document.getElementById('menu_button').onclick = hide_hamburger;
+    document.getElementById('menu_drawer').style.display = 'block';
+    console.log("suifhsjfsdhu");
+    document.getElementById('menu_button').style.left ='30%';
+    document.getElementById('menu_button').className = "is-open hamburger"
+}
+function hide_hamburger() {
+  document.getElementById('menu_drawer').style.display = 'none';
+  document.getElementById('menu_button').className = "is-closed hamburger";
+  document.getElementById('menu_button').style.left ='0';
+  document.getElementById('menu_button').onclick = show_panel;
+
+}
+
 
 function test() {
     console.log("YAY")
