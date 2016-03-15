@@ -95,7 +95,18 @@ h1 {
   cursor: pointer;
 
 }
-
+ul#levels li a:visited {
+    text-decoration: none;
+		color: black;
+}
+ul#levels li a:hover {
+    background-color: black;
+		color: white;
+}
+ul#levels li a:link {
+    text-decoration: none;
+		color: black;
+}
 /* ORIGINAL PANEL
 #floating-panel {
     position: absolute;

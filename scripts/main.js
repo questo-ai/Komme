@@ -84,6 +84,7 @@ function display_latlng() {
 }
 
 function create_panorama(coordinates) {
+  randomizeLocation(1)
     var panorama = new google.maps.StreetViewPanorama(
         document.getElementById('pano'), {
             position: coordinates,
@@ -113,7 +114,19 @@ function hide_hamburger() {
   document.getElementById('menu_button').onclick = show_panel;
 
 }
-
+function randomizeLocation(level) {
+  var orig_lat = latlng.lat();
+  var orig_lng = latlng.lng();
+  var max_difference = level * 0.001;
+  var rand_difference = getRandomInt(0.000001, max_difference);
+  var rand_lat = latlng.lat() + max_difference;
+  var rand_lng = latlng.lng() + max_difference;
+  latlng.lat() = rand_lat;
+  latlng.lng() = rand_lng;
+}
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 function test() {
     console.log("YAY")
