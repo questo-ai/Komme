@@ -84,7 +84,7 @@ function display_latlng() {
 }
 
 function create_panorama(coordinates) {
-  randomizeLocation(1)
+  // randomizeLocation(1)
     var panorama = new google.maps.StreetViewPanorama(
         document.getElementById('pano'), {
             position: coordinates,
